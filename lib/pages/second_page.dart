@@ -13,8 +13,10 @@ class _SecondPageState extends State<SecondPage> {
     return Container(
       width: 1080,
       height: 2340,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [Color(0xFF1F2937), Color(0x00111827)])
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(colors: [Color(0xFF1F2937), Color(0x00111827)], begin: Alignment.topLeft, end: Alignment.bottomRight
+        
+        )
       ),
     );
   }

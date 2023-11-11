@@ -1,8 +1,9 @@
+import 'package:contatos_app/pages/third_page.dart';
 import 'package:flutter/material.dart';
-import 'package:contatos_app/pages/terceira_page.dart';
+import 'second_page.dart'; // Import the second page file
 
 class First_Page extends StatefulWidget {
-  const First_Page({super.key});
+  const First_Page({Key? key}) : super(key: key);
 
   @override
   State<First_Page> createState() => _First_PageState();
@@ -12,8 +13,8 @@ class _First_PageState extends State<First_Page> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 1080,
-      height: 2340,
+       width: double.infinity, // Preenche a largura da tela
+        height: double.infinity, // Preenche a altura da tela
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFF1F2937), Color(0x00111827)],
@@ -38,47 +39,57 @@ class _First_PageState extends State<First_Page> {
               const SizedBox(
                 height: 100,
               ),
-              _buildButton('Novo Contato', () {
-                print('Novo Contato Pressionado');
-              }),
-              const SizedBox(
-                height: 20,
+              GestureDetector(
+                onTap: () {
+                  // Navigate to the new contact screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ThirdPage()),
+                  );
+                },
+                child: Container(
+                  width: 260,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.white, width: 1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Novo Contato',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              _buildButton('Contatos', () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => tela3()));
-              }),
+              const SizedBox(height: 20),
+              Container(
+                width: 260,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.white, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Contatos',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
             ],
-          )
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildButton(String text, VoidCallback onPressed) {
-    return Container(
-      width: 260,
-      height: 70,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          primary: Colors.transparent,
-          onPrimary: Colors.white,
-          side: BorderSide(color: Colors.white, width: 1),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
       ),
     );
   }
