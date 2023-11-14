@@ -44,8 +44,7 @@ class _First_PageState extends State<First_Page> {
                   // Navigate to the new contact screen
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ThirdPage()),
-                  );
+                    MaterialPageRoute(builder: (context) => const ThirdPage()));
                 },
                 child: Container(
                   width: 260,
