@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:contatos_app/pages/first_page.dart';
+import 'package:contatos_app/classes.dart';
+import 'package:contatos_app/pages/second_page.dart';
 
-class ThirdPage extends StatelessWidget {
-  const ThirdPage({Key? key}) : super(key: key);
+class ThirdPage extends StatefulWidget {
+  const ThirdPage({super.key});
+
+  @override
+  _ThirdPageState createState() => _ThirdPageState();
+}
+
+class _ThirdPageState extends State<ThirdPage> {
+  final DatabaseHelper dbHelper = DatabaseHelper();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +26,12 @@ class ThirdPage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => First_Page()));
+            Navigator.pop(context); // Voltar para a tela anterior
           },
           icon: const Icon(Icons.arrow_back_ios_new),
           color: Colors.white,
         ),
-        backgroundColor: Color(0xFF1F2937),
+        backgroundColor: const Color(0xFF1F2937),
         elevation: 0,
       ),
       body: Container(
@@ -37,78 +47,80 @@ class ThirdPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Image.asset("assets/images/contato.png",
-              width: 150,
-              height: 200,),
-              SizedBox(
+              Image.asset(
+                "assets/images/contato.png",
+                width: 150,
+                height: 200,
+              ),
+              const SizedBox(
                 height: 40,
               ),
-              SizedBox(
-                width: 400,
-                height: 70,
-                child: TextFormField(
-              autofocus: true,
-              keyboardType: TextInputType.name,
-              style: TextStyle(color: Colors.white,fontSize: 20),
-              decoration: InputDecoration(
-                labelText: "Nome",
-                labelStyle: TextStyle(color: Colors.white),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                )
-              )
-                )
+              TextFormField(
+                controller: nameController,
+                autofocus: true,
+                keyboardType: TextInputType.name,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+                decoration: InputDecoration(
+                  labelText: "Nome",
+                  labelStyle: const TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
-                 SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              
-              SizedBox(
-                width: 400,
-                height: 70,
-                child: TextFormField(
-              autofocus: true,
-              keyboardType: TextInputType.number,
-              style: TextStyle(color: Colors.white,fontSize: 20),
-              decoration: InputDecoration(          
+              TextFormField(
+                controller: phoneController,
+                autofocus: true,
+                keyboardType: TextInputType.number,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+                decoration: InputDecoration(
                   labelText: "Telefone",
-                  labelStyle: TextStyle(color: Colors.white,fontSize: 20),
+                  labelStyle: const TextStyle(color: Colors.white, fontSize: 20),
                   border: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(10),
-                  )
-              )
-                )
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
-                 SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-               SizedBox(
-                width: 400,
-                height: 70,
-                child: TextFormField(
-              autofocus: true,
-              keyboardType: TextInputType.emailAddress,
-              style: TextStyle(color: Colors.white,fontSize: 20),
-              decoration: InputDecoration(          
+              TextFormField(
+                controller: emailController,
+                autofocus: true,
+                keyboardType: TextInputType.emailAddress,
+                style: TextStyle(color: Colors.white, fontSize: 20),
+                decoration: InputDecoration(
                   labelText: "E-mail",
-                  labelStyle: TextStyle(color: Colors.white,fontSize: 20),
+                  labelStyle: TextStyle(color: Colors.white, fontSize: 20),
                   border: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(10),
-                  )
-              )
-                )
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
-              ]
+            ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          String name = nameController.text;
+          String phone = phoneController.text;
+          String email = emailController.text;
 
-      },
-      backgroundColor: Colors.white,
-      child: Icon(Icons.add),
+          Contact contact = Contact(name: name, phone: phone, email: email);
+
+          await dbHelper.insertContact(contact);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecondPage()),
+          );
+        },
+        backgroundColor: Colors.white,
+        child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

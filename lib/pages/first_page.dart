@@ -1,27 +1,27 @@
-import 'package:contatos_app/pages/third_page.dart';
 import 'package:flutter/material.dart';
-import 'second_page.dart'; // Import the second page file
+import 'package:contatos_app/pages/third_page.dart';
+import 'package:contatos_app/pages/second_page.dart';
 
-class First_Page extends StatefulWidget {
-  const First_Page({Key? key}) : super(key: key);
+class FirstPage extends StatefulWidget {
+  const FirstPage({Key? key}) : super(key: key);
 
   @override
-  State<First_Page> createState() => _First_PageState();
+  State<FirstPage> createState() => _FirstPageState();
 }
 
-class _First_PageState extends State<First_Page> {
+class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       width: double.infinity, // Preenche a largura da tela
-        height: double.infinity, // Preenche a altura da tela
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF1F2937), Color(0x00111827)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF1F2937), Color(0x00111827)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
-      ),
       child: Stack(
         children: [
           Column(
@@ -41,10 +41,10 @@ class _First_PageState extends State<First_Page> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigate to the new contact screen
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ThirdPage()));
+                    MaterialPageRoute(builder: (context) => const ThirdPage()),
+                  );
                 },
                 child: Container(
                   width: 260,
@@ -69,10 +69,10 @@ class _First_PageState extends State<First_Page> {
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  // Navigate to the new contact screen
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SecondPage()));
+                    MaterialPageRoute(builder: (context) => const SecondPage()),
+                  );
                 },
                 child: Container(
                   width: 260,
