@@ -1,5 +1,4 @@
 import 'package:contatos_app/pages/first_page.dart';
-import 'package:contatos_app/pages/third_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {

@@ -67,21 +67,29 @@ class _First_PageState extends State<First_Page> {
                 ),
               ),
               const SizedBox(height: 20),
-              Container(
-                width: 260,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(color: Colors.white, width: 1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Contatos',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      decoration: TextDecoration.none,
+              GestureDetector(
+                onTap: () {
+                  // Navigate to the new contact screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SecondPage()));
+                },
+                child: Container(
+                  width: 260,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.white, width: 1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Contatos',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
                   ),
                 ),
